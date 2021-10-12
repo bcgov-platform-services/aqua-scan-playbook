@@ -1,0 +1,18 @@
+- name: Generate Base Cluster Inventory
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+  tasks:
+
+  - name: Check Required Vairables are Set
+    assert:
+      that:
+        - aqua_url is defined and aqua_url != ''
+        - aqua_username is defined and aqua_username != ''
+        - aqua_password is defined and aqua_password != ''
+      fail_msg: Fail - Not All aqua_* Environment Variables are Set
+      success_msg: Success - Required aqua_* Variables Defined and Set
+
+  - name: Login
+    include_tasks: ./tasks/login.yaml

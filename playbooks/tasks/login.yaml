@@ -1,0 +1,14 @@
+---
+- name: Login to Aqua Service and Obtain JWT
+  uri:
+    url: "{{ aqua_url }}/api/v1/login"
+    method: POST
+    body_format: json
+    body:
+      id: "{{ aqua_username }}"
+      password: "{{ aqua_password }}"
+  register: response
+
+- name: Set Fact for JWT
+  set_fact:
+    token: "{{ response.json.token }}"
