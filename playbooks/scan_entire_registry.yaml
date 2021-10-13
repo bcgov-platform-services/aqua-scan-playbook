@@ -16,3 +16,7 @@
 
   - name: Login
     include_tasks: ./tasks/login.yaml
+  
+  - name: Scan Registries
+    include_tasks: ./tasks/scan_all_registries_for_all_images.yaml
+   

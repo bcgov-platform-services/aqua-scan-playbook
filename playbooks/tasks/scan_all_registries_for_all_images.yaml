@@ -1,0 +1,16 @@
+---
+- name: Start Scan 
+  uri:
+    url: "{{ aqua_url }}/api/v2/images/rescan/all"
+    status_code:
+    - 204
+    method: POST
+    headers:
+      Authorization: "Bearer {{ token }}"
+    body_format: json
+    body:
+      full_rescan: true
+      filter:
+        registry: "{{ item }}"
+  with_items: image_registries
+  
