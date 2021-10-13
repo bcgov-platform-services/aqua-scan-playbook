@@ -1,0 +1,41 @@
+name: aqua-post-deploy
+on:
+  release:
+    types: [released]
+
+jobs:
+  build: 
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get the current branch name
+      run: echo "Not building as missing entitlement certs"
+    - name: Get the current branch name
+      shell: bash
+      run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+      id: branchref
+    - uses: actions/checkout@v1
+      with:
+        ref: ${{ github.ref }}
+    - name: Login to DockerHub Registry
+      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+    - name: Docker meta
+        id: meta
+        uses: crazy-max/ghaction-docker-meta@v2
+        with:
+          # list of Docker images to use as base name for tags
+          images: |
+            bcdevopscluster/aqua-scan-playbook
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          tags: ${{ steps.meta.outputs.tags }}
+          push: true

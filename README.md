@@ -1,5 +1,5 @@
 # Aqua Scanner Playbook 
-
+[![Aqua Trivy Vulnerability Scanner](https://github.com/bcgov-platform-services/aqua-scan-playbook/actions/workflows/trivy.yaml/badge.svg)](https://github.com/bcgov-platform-services/aqua-scan-playbook/actions/workflows/trivy.yaml)
 This playbook simplifies the integration of aqua scans into a workflow by wrapping the aqua scan api endpoints into a playbook.
 
 ## Features
@@ -12,4 +12,9 @@ This playbook simplifies the integration of aqua scans into a workflow by wrappi
 - `aqua_url: string`
 - `aqua_username: string`
 - `aqua_password: string`
+
+
+## Running Image
+
+`docker run bcdevopscluster/aqua-scan-playbook ansible-playbook scan_entire_registry.yaml -e aqua_username="..." -e aqua_password="..."`
 
