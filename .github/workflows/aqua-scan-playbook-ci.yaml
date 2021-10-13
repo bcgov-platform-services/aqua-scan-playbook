@@ -1,4 +1,4 @@
-name: aqua-post-deploy
+name: CI aqua scan playbook
 on:
   release:
     types: [released]
@@ -7,8 +7,6 @@ jobs:
   build: 
     runs-on: ubuntu-latest
     steps:
-    - name: Get the current branch name
-      run: echo "Not building as missing entitlement certs"
     - name: Get the current branch name
       shell: bash
       run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
