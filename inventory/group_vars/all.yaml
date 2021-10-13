@@ -1,4 +1,6 @@
 aqua_url: https://aqua.apps.clab.devops.gov.bc.ca
 aqua_username: test
-aqua_password: Apple123! 
+aqua_password: Apple123!
 aqua_webhook_url: null
+image_registries:
+- Dockerhub
