@@ -13,3 +13,4 @@
       filter:
         registry: "{{ item }}"
   with_items: image_registries
+  
